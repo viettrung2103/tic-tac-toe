@@ -18,6 +18,7 @@ function App() {
   const [pressCreate, setPressCreate] = useState(false);
   return (
     <div className="app">
+      <h1>Tic Tac Toe</h1>
       <CreateBoard
         row={row}
         setRow={setRow}
