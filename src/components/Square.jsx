@@ -1,7 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Square = ({ rowIdx, colIdx, handleClick, squares }) => {
   const [value, setValue] = useState(null);
+
+  useEffect(() => {
+    // console.log("reset ", isReset);
+    setValue(squares[rowIdx][colIdx]);
+  }, [squares]);
 
   const handleButtonClick = () => {
     // console.log("clicked", rowIdx, colIdx);
@@ -13,15 +18,6 @@ const Square = ({ rowIdx, colIdx, handleClick, squares }) => {
     <button
       className="square"
       onClick={handleButtonClick}
-      style={{
-        width: "100px",
-        height: "100px",
-        fontSize: "24px",
-        fontWeight: "bold",
-        border: "2px solid #333",
-        backgroundColor: "#fff",
-        cursor: "pointer",
-      }}
     >
       {value}
     </button>

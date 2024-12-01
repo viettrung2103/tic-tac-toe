@@ -1,8 +1,21 @@
 import { useEffect, useState } from "react";
 import Square from "./Square";
 
-const Board = ({ row, col, setWinner, running, setRunning }) => {
-  const [count, setCount] = useState(0);
+const Board = ({
+  row,
+  col,
+  winner,
+  setWinner,
+  running,
+  setRunning,
+  setIsWin,
+  setIsDraw,
+  totalGames,
+  setTotalGames,
+  count,
+  setCount,
+}) => {
+  // const [count, setCount] = useState(0);
   const [squares, setSquares] = useState([]);
   const [boardCreated, setBoardCreate] = useState(false);
 
@@ -15,12 +28,10 @@ const Board = ({ row, col, setWinner, running, setRunning }) => {
       }
       grid.push(row);
     }
-    setSquares(grid);
+    setSquares((s) => grid);
   };
 
   const checkWinner = (player) => {
-    // let player = "X";
-    // isWin = false;
     if (checkRowWin(player)) {
       return true;
     }
@@ -104,6 +115,33 @@ const Board = ({ row, col, setWinner, running, setRunning }) => {
     return false;
   };
 
+  const checkDraw = () => {
+    // isDraw = false;
+    for (let i = 0; i < row; i++) {
+      for (let j = 0; j < col; j++) {
+        if (squares[i][j] === null) {
+          // if there is empty cell; return
+          return false;
+        }
+      }
+    }
+    // when all cell is filled, return true
+    return true;
+  };
+
+  const handleReset = () => {
+    console.log("reset");
+    // setSquares((s) => []);
+    // setBoardCreate((bc) => false);
+
+    setCount((c) => 0);
+    setRunning((r) => true);
+    setIsWin((iw) => false);
+    setIsDraw((d) => false);
+    // setWinner((w) => null);
+    createGrid(row, col);
+  };
+
   // init board
   useEffect(() => {
     createGrid(row, col);
@@ -113,35 +151,53 @@ const Board = ({ row, col, setWinner, running, setRunning }) => {
 
   //check winner
   useEffect(() => {
-    if (boardCreated) {
+    if (boardCreated && running) {
       if (checkWinner("X")) {
-        console.log("X win");
         setWinner("X");
+        setIsWin((w) => true);
         setRunning((r) => false);
+        setTotalGames((g) => g + 1);
       } else if (checkWinner("O")) {
-        console.log("O win");
         setWinner("O");
+        setIsWin((w) => true);
         setRunning((r) => false);
+        setTotalGames((g) => g + 1);
+      } else if (checkDraw()) {
+        setIsDraw((d) => true);
+        setRunning((r) => false);
+        setTotalGames((g) => g + 1);
       }
     }
   }, [squares]);
 
   const handleClick = (rowIndex, colIndex) => {
     if (running) {
-      console.log(`click pos(${rowIndex}, ${colIndex})`);
+      console.log(`click pos(${rowIndex}, ${colIndex}, )`);
       const newSquares = [...squares];
-      if (count % 2 === 0) {
-        newSquares[rowIndex][colIndex] = "X";
-      } else {
-        newSquares[rowIndex][colIndex] = "O";
+      
+      // make sure clicked cell cannot be changed
+      if (newSquares[rowIndex][colIndex] == null) {
+        if (count % 2 === 0) {
+          newSquares[rowIndex][colIndex] = isTotalGameEven() ? "X" : "O";
+        } else {
+          newSquares[rowIndex][colIndex] = isTotalGameEven() ? "O" : "X";
+        }
+        setCount((c) => c + 1);
+        setSquares((s) => newSquares);
       }
-      setCount((c) => c + 1);
-      setSquares((s) => newSquares);
+    }
+  };
+
+  const isTotalGameEven = () => {
+    if (totalGames % 2 === 0) {
+      return true;
+    } else {
+      return false;
     }
   };
 
   return (
-    <div>
+    <div className="container">
       <div
         className="board"
         style={{
@@ -149,18 +205,16 @@ const Board = ({ row, col, setWinner, running, setRunning }) => {
           gridTemplateColumns: `repeat(${col}, 100px)`,
           gridTemplateRows: `repeat(${row}, 100px)`,
           gap: "4px",
-          backgroundColor: "#fff",
+          // backgroundColor: "#14bdac",
           padding: "8px",
+          border: "none",
+          gridGap: "2",
         }}
       >
         {squares.map((row, rowIndex) => (
           <div key={rowIndex} className="row" style={{ display: "contents" }}>
             {row.map((col, colIndex) => (
-              <div key={colIndex} className="col">
-                {/* {
-                  (console.log("row ", row, " ,collumn ", col),
-                  console.log("row idx ", rowIndex, " ,collumn idx", colIndex))
-                } */}
+              <div key={colIndex} className="col grid-item ">
                 <Square
                   handleClick={handleClick}
                   rowIdx={rowIndex}
@@ -171,6 +225,11 @@ const Board = ({ row, col, setWinner, running, setRunning }) => {
             ))}
           </div>
         ))}
+      </div>
+      <div className="reset-container">
+        <button className="reset-btn" onClick={handleReset} s>
+          Reset Game
+        </button>
       </div>
     </div>
   );

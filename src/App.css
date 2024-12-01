@@ -4,18 +4,117 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
-}
-.square {
-  background: #fff;
-  border: 1px solid #999;
-  float: left;
-  font-size: 24px;
-  font-weight: bold;
-  line-height: 34px;
-  height: 34px;
-  margin-right: -1px;
-  margin-top: -1px;
   padding: 0;
-  text-align: center;
-  width: 34px;
+  margin: 0;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.dashboard {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.winner-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border: #5e5e5e 1px solid;
+  width: 340px;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin: 10px;
+  border-radius: 10px;
+  border-bottom-style: hidden;
+}
+
+.winner-container:hover {
+  cursor: pointer;
+}
+
+.player-turn {
+  border-bottom: 1.5px solid #14bdac;
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.16), 0 4px 5px rgba(0, 0, 0, 0.08);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* background-color: #14bdac; */
+  background-color: #fff;
+  width: 100%;
+}
+
+.board {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.grid-item {
+  outline: 3px solid black;
+}
+
+/* .grid-item:first-of-type {
+  outline-color:saddlebrown ;
+} */
+/* .grid-item:first-child {
+  outline-top: none;
+  outline-left: none;
+}
+
+.grid-item:last-child {
+  outline-bottom: none;
+}
+
+.grid-item:nth-child(3n + 1) {
+  outline-left: none;
+}
+
+.grid-item:nth-child(3n) {
+  outline-right: none;
+}  */
+.square {
+  width: 100%;
+  height: 100%;
+  font-size: 3rem;
+  font-weight: bold;
+  /* background-origin: padding-box; */
+  /* border: 2px solid #999; */
+  background-color: #fff;
+  border: none;
+}
+
+.reset-container {
+  margin-top: 3rem;
+  background-color: #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.reset-btn {
+  /* background-color: #14bdac; */
+  color: #14bdac;
+  background-color: #fff;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20;
+}
+.reset-btn:hover {
+  cursor: pointer;
+  background-color: #fff;
 }
