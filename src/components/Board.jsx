@@ -14,10 +14,14 @@ const Board = ({
   setTotalGames,
   count,
   setCount,
+  boardCreated,
+  setBoardCreated,
+  setPressCreate,
+  pressCreate,
 }) => {
   // const [count, setCount] = useState(0);
   const [squares, setSquares] = useState([]);
-  const [boardCreated, setBoardCreate] = useState(false);
+  // const [boardCreated, setBoardCreated] = useState(false);
 
   const createGrid = (row, col) => {
     const grid = [];
@@ -28,7 +32,8 @@ const Board = ({
       }
       grid.push(row);
     }
-    setSquares((s) => grid);
+    return grid;
+    // setSquares((s) => grid);
   };
 
   const checkWinner = (player) => {
@@ -131,23 +136,30 @@ const Board = ({
 
   const handleReset = () => {
     console.log("reset");
-    // setSquares((s) => []);
-    // setBoardCreate((bc) => false);
 
     setCount((c) => 0);
     setRunning((r) => true);
     setIsWin((iw) => false);
     setIsDraw((d) => false);
     // setWinner((w) => null);
-    createGrid(row, col);
+    setSquares(createGrid(row, col));
   };
 
   // init board
   useEffect(() => {
-    createGrid(row, col);
-    setBoardCreate((bc) => true);
-    setRunning((r) => true);
-  }, []);
+    // reset board
+    if (pressCreate) {
+      setSquares((s) => createGrid(row, col));
+
+      setBoardCreated((bc) => true);
+      setRunning((r) => true);
+      setIsDraw((d) => false);
+      setIsWin((iw) => false);
+      setWinner((w) => null);
+      setCount((c) => 0);
+      setPressCreate((pc) => false);
+    }
+  }, [pressCreate]);
 
   //check winner
   useEffect(() => {
@@ -174,7 +186,7 @@ const Board = ({
     if (running) {
       console.log(`click pos(${rowIndex}, ${colIndex}, )`);
       const newSquares = [...squares];
-      
+
       // make sure clicked cell cannot be changed
       if (newSquares[rowIndex][colIndex] == null) {
         if (count % 2 === 0) {
@@ -205,7 +217,7 @@ const Board = ({
           gridTemplateColumns: `repeat(${col}, 100px)`,
           gridTemplateRows: `repeat(${row}, 100px)`,
           gap: "4px",
-          // backgroundColor: "#14bdac",
+
           padding: "8px",
           border: "none",
           gridGap: "2",
@@ -227,7 +239,7 @@ const Board = ({
         ))}
       </div>
       <div className="reset-container">
-        <button className="reset-btn" onClick={handleReset} s>
+        <button className="reset-btn" onClick={handleReset}>
           Reset Game
         </button>
       </div>

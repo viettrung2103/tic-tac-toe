@@ -8,6 +8,7 @@ const Square = ({ rowIdx, colIdx, handleClick, squares }) => {
     setValue(squares[rowIdx][colIdx]);
   }, [squares]);
 
+  
   const handleButtonClick = () => {
     // console.log("clicked", rowIdx, colIdx);
     handleClick(rowIdx, colIdx);
