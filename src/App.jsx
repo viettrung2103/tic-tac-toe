@@ -26,6 +26,7 @@ function App() {
         boardCreated={boardCreated}
         setBoardCreated={setBoardCreated}
         setPressCreate={setPressCreate}
+        setRunning={setRunning}
       />
       <DashBoard
         winner={winner}
@@ -33,8 +34,10 @@ function App() {
         totalGames={totalGames}
         running={running}
         count={count}
+        pressCreate={pressCreate}
+        boardCreated={boardCreated}
       />
-      {!running && <h1>Game Over</h1>}
+      {!running && boardCreated && <h1>Game Over</h1>}
       {isWin ? <h1>Winner is {winner}</h1> : isDraw && <h1>Draw</h1>}
 
       <Board

@@ -159,6 +159,8 @@ const Board = ({
       setCount((c) => 0);
       setPressCreate((pc) => false);
     }
+    // if (!boardCreated) {
+    // }
   }, [pressCreate]);
 
   //check winner

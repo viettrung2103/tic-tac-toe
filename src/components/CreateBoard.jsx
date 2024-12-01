@@ -7,6 +7,7 @@ const CreateBoard = ({
   setCol,
   boardCreated,
   setPressCreate,
+  setRunning,
 }) => {
   const [rowInput, setRowInput] = useState(row);
   const [colInput, setColInput] = useState(col);
@@ -27,7 +28,6 @@ const CreateBoard = ({
   return (
     <div className="create-container">
       <div>CreateBoard</div>
-      <div></div>
       <div className="input">
         <label>Row: </label>
         <input
