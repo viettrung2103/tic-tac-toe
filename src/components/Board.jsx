@@ -4,7 +4,6 @@ import Square from "./Square";
 const Board = ({
   row,
   col,
-  winner,
   setWinner,
   running,
   setRunning,
@@ -19,9 +18,9 @@ const Board = ({
   setPressCreate,
   pressCreate,
 }) => {
-  // const [count, setCount] = useState(0);
+  
   const [squares, setSquares] = useState([]);
-  // const [boardCreated, setBoardCreated] = useState(false);
+  
 
   const createGrid = (row, col) => {
     const grid = [];
@@ -33,7 +32,7 @@ const Board = ({
       grid.push(row);
     }
     return grid;
-    // setSquares((s) => grid);
+
   };
 
   const checkWinner = (player) => {
@@ -141,7 +140,6 @@ const Board = ({
     setRunning((r) => true);
     setIsWin((iw) => false);
     setIsDraw((d) => false);
-    // setWinner((w) => null);
     setSquares(createGrid(row, col));
   };
 
@@ -159,8 +157,7 @@ const Board = ({
       setCount((c) => 0);
       setPressCreate((pc) => false);
     }
-    // if (!boardCreated) {
-    // }
+  
   }, [pressCreate]);
 
   //check winner

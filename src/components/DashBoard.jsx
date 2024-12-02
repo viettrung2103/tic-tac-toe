@@ -2,12 +2,9 @@ import { useState, useEffect } from "react";
 
 const DashBoard = ({
   winner,
-  isDraw,
   totalGames,
   running,
   count,
-  pressCreate,
-  boardCreated,
 }) => {
   const [xWinNum, setXWinNum] = useState(0);
   const [oWinNum, setOWinNum] = useState(0);
@@ -104,7 +101,7 @@ const DashBoard = ({
         </div>
       </div>
       <div className="player-turn-text">
-        {boardCreated && <p>{getPlayerTurn()} Turn</p>}
+        {running && <p>{getPlayerTurn()} Turn</p>}
       </div>
     </div>
   );

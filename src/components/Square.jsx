@@ -4,13 +4,11 @@ const Square = ({ rowIdx, colIdx, handleClick, squares }) => {
   const [value, setValue] = useState(null);
 
   useEffect(() => {
-    // console.log("reset ", isReset);
     setValue(squares[rowIdx][colIdx]);
   }, [squares]);
 
   
   const handleButtonClick = () => {
-    // console.log("clicked", rowIdx, colIdx);
     handleClick(rowIdx, colIdx);
     setValue(squares[rowIdx][colIdx]);
   };

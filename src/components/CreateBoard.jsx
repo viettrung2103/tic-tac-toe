@@ -5,9 +5,8 @@ const CreateBoard = ({
   setRow,
   col,
   setCol,
-  boardCreated,
   setPressCreate,
-  setRunning,
+  
 }) => {
   const [rowInput, setRowInput] = useState(row);
   const [colInput, setColInput] = useState(col);
