@@ -18,9 +18,7 @@ const Board = ({
   setPressCreate,
   pressCreate,
 }) => {
-  
   const [squares, setSquares] = useState([]);
-  
 
   const createGrid = (row, col) => {
     const grid = [];
@@ -32,7 +30,6 @@ const Board = ({
       grid.push(row);
     }
     return grid;
-
   };
 
   const checkWinner = (player) => {
@@ -140,6 +137,8 @@ const Board = ({
     setRunning((r) => true);
     setIsWin((iw) => false);
     setIsDraw((d) => false);
+    // must have this, in case press reset when game is over
+    setWinner((w) => null);
     setSquares(createGrid(row, col));
   };
 
@@ -157,7 +156,6 @@ const Board = ({
       setCount((c) => 0);
       setPressCreate((pc) => false);
     }
-  
   }, [pressCreate]);
 
   //check winner
@@ -215,11 +213,11 @@ const Board = ({
           display: "grid",
           gridTemplateColumns: `repeat(${col}, 100px)`,
           gridTemplateRows: `repeat(${row}, 100px)`,
-          gap: "4px",
+          // gap: "4px",
 
           padding: "8px",
           border: "none",
-          gridGap: "2",
+          // gridGap: "2px",
         }}
       >
         {squares.map((row, rowIndex) => (
