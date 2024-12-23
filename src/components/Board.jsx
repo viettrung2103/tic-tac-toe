@@ -49,9 +49,11 @@ const Board = ({
   };
 
   const checkRowWin = (player) => {
+    //on each row
     for (let i = 0; i < row; i++) {
       for (let j = 0; j < col; j++) {
-        if (j + 2 < col) {
+        // them for (j -2 >)
+        if (j + 2 < col ) {
           if (
             squares[i][j] === player &&
             squares[i][j + 1] === player &&
@@ -65,6 +67,7 @@ const Board = ({
     return false;
   };
 
+  // on each col
   const checkColWin = (player) => {
     for (let i = 0; i < col; i++) {
       for (let j = 0; j < row; j++) {

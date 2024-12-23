@@ -1,11 +1,6 @@
 import { useState, useEffect } from "react";
 
-const DashBoard = ({
-  winner,
-  totalGames,
-  running,
-  count,
-}) => {
+const DashBoard = ({ winner, totalGames, running, count }) => {
   const [xWinNum, setXWinNum] = useState(0);
   const [oWinNum, setOWinNum] = useState(0);
   const [playerStart, setPlayerStart] = useState("X");
@@ -23,6 +18,12 @@ const DashBoard = ({
     if (winner === "X") {
       console.log("X win");
       setXWinNum((x) => x + 1);
+      setXWinNum((x) => x + 1);
+      setXWinNum((x) => x + 1);
+      // setXWinNum( x + 1);
+      // setXWinNum( x + 1);
+      // setXWinNum( x + 1);
+
     } else if (winner === "O") {
       console.log("O win");
       setOWinNum((o) => o + 1);

@@ -1,13 +1,6 @@
 import { useState } from "react";
 
-const CreateBoard = ({
-  row,
-  setRow,
-  col,
-  setCol,
-  setPressCreate,
-  
-}) => {
+const CreateBoard = ({ row, setRow, col, setCol, setPressCreate }) => {
   const [rowInput, setRowInput] = useState(row);
   const [colInput, setColInput] = useState(col);
 
@@ -47,7 +40,11 @@ const CreateBoard = ({
           value={colInput}
         />
       </div>
-      <button onClick={handleCreateBoard}>Create</button>
+      
+      
+      <button onClick={handleCreateBoard} className="create-btn">
+        Create
+      </button>
     </div>
   );
 };
